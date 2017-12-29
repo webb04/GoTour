@@ -36,15 +36,15 @@ func Same(t1, t2 *tree.Tree) bool {
 	var s2 []int
 
 	for i := 0; i < 20; i++ {
-  	select {
+		select {
     	case msg1 := <-ch1:
       	fmt.Println("ch1 received", msg1)
-			  s1 = append(s1, msg1)
-		  case msg2 := <-ch2:
-      	fmt.Println("ch2 received", msg2)
-			  s2 = append(s2, msg2)
-    }
-  }
+				s1 = append(s1, msg1)
+			case msg2 := <-ch2:
+				fmt.Println("ch2 received", msg2)
+				s2 = append(s2, msg2)
+		}
+	}
 
 	sort.Ints(s1)
 	sort.Ints(s2)
