@@ -28,16 +28,16 @@ func Crawl(url string, depth int, fetcher Fetcher, quit chan bool) {
 	
 	for {
 		select {
-	    case msg := <-urls:
-        if !urlState[msg] {
-          fmt.Println("received message", msg)
-				  setState(msg)
+			case msg := <-urls:
+				if !urlState[msg] {
+					fmt.Println("received message", msg)
+					setState(msg)
 				}
-			  go Crawl(msg, depth-1, fetcher, quit)
+				go Crawl(msg, depth-1, fetcher, quit)
 			case <-quit:
-			  fmt.Println("Time to stop")
-        return
-    }
+				fmt.Println("Time to stop")
+				return
+		}
 	}
 }
 
